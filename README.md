@@ -1,2 +1,2 @@
-# mlops-ml
-End to end ML project with deployment and monitoring
+# mlops-cifar10
+End to end classification project with deployment and monitoring.
