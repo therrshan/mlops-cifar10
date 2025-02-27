@@ -32,4 +32,4 @@ jobs:
       # Step 4: Run tests (Optional, if you have tests)
       - name: Run tests
         run: |
-          pytest  # Or any testing command you use
+          pytest  tests/test_app.py
