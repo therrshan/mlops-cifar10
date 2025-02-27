@@ -1,0 +1,7 @@
+Flask==3.1.0
+mlflow==2.20.3
+numpy==1.19.2
+Pillow==11.1.0
+torch==2.5.1+cu124
+torchvision==0.20.1+cu124
+Werkzeug==3.1.3

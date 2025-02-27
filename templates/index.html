@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            var formData = new FormData(document.getElementById("uploadForm"));
+
+            fetch("/", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("HTTP error! Status: " + response.status);
+                }
+                return response.json(); // Convert response to JSON
+            })
+            .then(data => {
+                if (data.prediction !== undefined) {
+                    document.getElementById("result").innerText = "Predicted Class: " + data.prediction;
+                } else {
+                    document.getElementById("result").innerText = "Error: Unexpected response format.";
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").innerText = "Error: " + error.message;
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Image Classification</h1>
+    <form id="uploadForm" enctype="multipart/form-data" onsubmit="submitForm(event)">
+        <label for="model">Select Model:</label>
+        <select name="model" id="model">
+            <option value="simple_cnn">Simple CNN</option>
+            <option value="logistic_regression">Logistic Regression</option>
+        </select>
+        <br><br>
+        <label for="file">Upload Image:</label>
+        <input type="file" name="file" id="file" accept="image/*" required>
+        <br><br>
+        <button type="submit">Classify Image</button>
+    </form>
+    <p id="result"></p>
+</body>
+</html>
